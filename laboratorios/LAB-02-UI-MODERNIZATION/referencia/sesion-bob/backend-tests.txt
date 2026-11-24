@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.workshop.roomflow.web.ReservationControllerTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.522 s -- in com.workshop.roomflow.web.ReservationControllerTest

@@ -1,0 +1,23 @@
+{
+  "canonicalDocuments": 10,
+  "localLinksChecked": 121,
+  "brokenLinks": [],
+  "mermaidDiagramsParsed": 6,
+  "shellSyntax": "PASS",
+  "cleanPreparation": [
+    {
+      "variant": "jsf",
+      "preparation": "PASS",
+      "copiedDocumentationLinks": 11,
+      "preservesExistingWork": "PASS",
+      "sourceDocumentsUnchanged": "PASS"
+    },
+    {
+      "variant": "struts",
+      "preparation": "PASS",
+      "copiedDocumentationLinks": 11,
+      "preservesExistingWork": "PASS",
+      "sourceDocumentsUnchanged": "PASS"
+    }
+  ]
+}

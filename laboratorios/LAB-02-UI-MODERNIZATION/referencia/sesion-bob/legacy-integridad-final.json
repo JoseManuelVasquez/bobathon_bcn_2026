@@ -1,0 +1,9 @@
+{
+  "checked": 14,
+  "modified": [],
+  "legacySourcesPreserved": true,
+  "generatedBusinessClassesEqualToLegacy": {
+    "domain/Reservation.java": true,
+    "service/ReservationService.java": true
+  }
+}

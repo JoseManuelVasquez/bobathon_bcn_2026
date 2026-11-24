@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts><constant name="struts.devMode" value="false"/><constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+<package name="roomflow" namespace="/" extends="struts-default" strict-method-invocation="true">
+<global-results><result name="error">/WEB-INF/views/index.jsp</result><result name="input">/WEB-INF/views/index.jsp</result></global-results>
+<action name="reservations" class="com.workshop.roomflow.web.ReservationAction" method="execute"><result>/WEB-INF/views/index.jsp</result><allowed-methods>execute</allowed-methods></action>
+<action name="detail" class="com.workshop.roomflow.web.ReservationAction" method="detail"><result>/WEB-INF/views/detail.jsp</result><allowed-methods>detail</allowed-methods></action>
+<action name="create" class="com.workshop.roomflow.web.ReservationAction" method="create"><result>/WEB-INF/views/index.jsp</result><allowed-methods>create</allowed-methods></action>
+<action name="confirm" class="com.workshop.roomflow.web.ReservationAction" method="confirm"><result>/WEB-INF/views/detail.jsp</result><allowed-methods>confirm</allowed-methods></action>
+<action name="cancel" class="com.workshop.roomflow.web.ReservationAction" method="cancel"><result>/WEB-INF/views/detail.jsp</result><allowed-methods>cancel</allowed-methods></action>
+</package></struts>

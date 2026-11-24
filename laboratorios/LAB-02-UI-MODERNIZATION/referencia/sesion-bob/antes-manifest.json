@@ -1,0 +1,16 @@
+{
+  "architecture-diagram.mmd": "c91e385cca3f73782ea0a5670f67068acb5f2d7ef96a3870a2127e2c3d303fb2",
+  "ui-modernization-options.json": "a66dbaf6dd9e1504d1c6abb176933f4da942e86650303520f5f77d86c4918f32",
+  "architecture.md": "887fdf0b067117e8ef9d521885ed06dcaf5ac8c6edf020d83aeb8e8c9b4ed310",
+  "pom.xml": "414cc1d6a20c593eca47856d52da6f16f7b5250cbf349142e3084ea11317a046",
+  "README.md": "f2d5b0d2a926ca68660ab8986b85f733f3e62716b8d4accc3f7b0be690f9b538",
+  "src/main/resources/struts.xml": "db8cf0d18ea94070414e7b91619c9d11a7c2f94fd26f405750f5b0217feccce5",
+  "src/main/webapp/index.html": "6a5336a84bd2b97ac2807b8f07ef80593d309e16ef4061db31fa2596b777441a",
+  "src/main/webapp/legacy.css": "3cd257dbeff2be833a6af02e86f1f809423e387d631938d613b202cbaae2b29e",
+  "src/main/webapp/WEB-INF/web.xml": "b5d5090d10cc2b5c7c2b1ab8d90b895cf32bd66755f65acd2fae05bc6c1d6ce1",
+  "src/main/webapp/WEB-INF/views/detail.jsp": "7f389fdced7f2c1aca7e7faf26ac2f08774bc2c1596fa8e208520d0634d5b3d5",
+  "src/main/webapp/WEB-INF/views/index.jsp": "0d58a68bb14b90f20064746ebe2c7c1007fa2499e5b458c399ffdb6b74252ea9",
+  "src/main/java/com/workshop/roomflow/web/ReservationAction.java": "cec1c97263ab13ca9a90fd5cd4b1cd6e7acdf8b21cb368c12a0c80d856616a7e",
+  "src/main/java/com/workshop/roomflow/service/ReservationService.java": "74473806b9fff221c0054402e475376a558374d097e2a9a6098ba5d1ca065081",
+  "src/main/java/com/workshop/roomflow/domain/Reservation.java": "827ebdf6518222932a819b46609061b2a766b097cf09b5620954a6620a83725c"
+}

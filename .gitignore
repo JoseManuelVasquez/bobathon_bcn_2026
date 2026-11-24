@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+*.log
+.env
+.env.*
+*token*
+*credential*
+public/content/
+public/media/
+public/downloads/
+public/resources/
+__pycache__/
+*.pyc

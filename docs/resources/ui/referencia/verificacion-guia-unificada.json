@@ -1,0 +1,31 @@
+{
+  "studentEntryFiles": [
+    "README.md",
+    "LAB.md"
+  ],
+  "localLinksChecked": 36,
+  "anchorsChecked": 8,
+  "brokenLinks": 0,
+  "mermaidDiagrams": 6,
+  "preparation": [
+    {
+      "variant": "jsf",
+      "preparation": "PASS",
+      "onlyOneReport": "PASS",
+      "reportLink": "PASS",
+      "preservesExistingWork": "PASS"
+    },
+    {
+      "variant": "struts",
+      "preparation": "PASS",
+      "onlyOneReport": "PASS",
+      "reportLink": "PASS",
+      "preservesExistingWork": "PASS"
+    }
+  ],
+  "invalidVariant": "PASS",
+  "missingTemplateDoesNotCreateWork": "PASS",
+  "legacyFilesUnchanged": 45,
+  "existingStudentReportUnchanged": true,
+  "previousDocumentationArchive": "MATERIAL-INSTRUCTOR/LAB-02-UI-MODERNIZATION/documentacion-previa-20261124T154815.zip"
+}

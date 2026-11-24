@@ -1,0 +1,21 @@
+{
+  "name": "bobathon-bcn-2026",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "content": "python3 scripts/prepare_content.py",
+    "dev": "vite --host 127.0.0.1",
+    "build": "npm run content && vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "marked": "18.3.0",
+    "dompurify": "3.5.0",
+    "mermaid": "11.17.2",
+    "@fontsource-variable/manrope": "5.3.0"
+  },
+  "devDependencies": {
+    "vite": "8.3.8"
+  }
+}

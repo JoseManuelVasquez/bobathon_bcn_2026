@@ -1,0 +1,460 @@
+{
+  "/api/reservations": {
+    "status": 200,
+    "body": [
+      {
+        "id": 1,
+        "organizer": "Ana Torres",
+        "room": "Atlas",
+        "date": "2027-04-12",
+        "slot": "MORNING",
+        "attendees": 6,
+        "status": "REQUESTED"
+      },
+      {
+        "id": 2,
+        "organizer": "Luis Moreno",
+        "room": "Norte",
+        "date": "2027-04-12",
+        "slot": "AFTERNOON",
+        "attendees": 4,
+        "status": "CONFIRMED"
+      },
+      {
+        "id": 3,
+        "organizer": "Marta Vidal",
+        "room": "Taller",
+        "date": "2027-04-13",
+        "slot": "MORNING",
+        "attendees": 12,
+        "status": "REQUESTED"
+      },
+      {
+        "id": 4,
+        "organizer": "Diego Ríos",
+        "room": "Atlas",
+        "date": "2027-04-13",
+        "slot": "AFTERNOON",
+        "attendees": 5,
+        "status": "CANCELLED"
+      }
+    ]
+  },
+  "/api/rooms": {
+    "status": 200,
+    "body": [
+      {
+        "name": "Atlas",
+        "capacity": 12
+      },
+      {
+        "name": "Norte",
+        "capacity": 8
+      },
+      {
+        "name": "Taller",
+        "capacity": 20
+      }
+    ]
+  },
+  "/v3/api-docs": {
+    "status": 200,
+    "body": {
+      "openapi": "3.1.0",
+      "info": {
+        "title": "RoomFlow REST API",
+        "description": "Meeting-room reservation API migrated from the Struts 2 RoomFlow application.",
+        "version": "1.0.0"
+      },
+      "servers": [
+        {
+          "url": "http://localhost:8085",
+          "description": "Generated server url"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Reservations",
+          "description": "Room reservation lifecycle: list, detail, create, confirm, cancel"
+        },
+        {
+          "name": "Rooms",
+          "description": "Room catalogue"
+        }
+      ],
+      "paths": {
+        "/api/reservations": {
+          "get": {
+            "tags": [
+              "Reservations"
+            ],
+            "summary": "List reservations",
+            "description": "Returns all reservations. The optional search term is a case-insensitive substring match against \"organizer room\"; blank matches everything.",
+            "operationId": "list",
+            "parameters": [
+              {
+                "name": "search",
+                "in": "query",
+                "description": "Free-text filter on organizer and room",
+                "required": false,
+                "schema": {
+                  "type": "string"
+                },
+                "example": "atlas"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Reservation list",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Reservation"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "post": {
+            "tags": [
+              "Reservations"
+            ],
+            "summary": "Create a reservation request",
+            "description": "Creates a reservation in status REQUESTED. Validates organizer (1-120 chars), known room, ISO date, slot MORNING/AFTERNOON and attendees between 1 and the room capacity.",
+            "operationId": "create",
+            "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CreateReservationRequest"
+                  }
+                }
+              },
+              "required": true
+            },
+            "responses": {
+              "201": {
+                "description": "Solicitud creada.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Reservation"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Validation error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/api/reservations/{id}/confirm": {
+          "post": {
+            "tags": [
+              "Reservations"
+            ],
+            "summary": "Confirm a pending reservation",
+            "description": "REQUESTED -> CONFIRMED, only if no other CONFIRMED reservation exists for the same room, date and slot.",
+            "operationId": "confirm",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "description": "Reservation id",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "example": 1
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Reserva confirmada.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Reservation"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Reserva no encontrada.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "409": {
+                "description": "Not pending, or room already occupied",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/api/reservations/{id}/cancel": {
+          "post": {
+            "tags": [
+              "Reservations"
+            ],
+            "summary": "Cancel a reservation",
+            "description": "REQUESTED or CONFIRMED -> CANCELLED.",
+            "operationId": "cancel",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "description": "Reservation id",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "example": 1
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Reserva cancelada.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Reservation"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Reserva no encontrada.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "409": {
+                "description": "La reserva ya está cancelada.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/api/rooms": {
+          "get": {
+            "tags": [
+              "Rooms"
+            ],
+            "summary": "List rooms",
+            "description": "Room names (in catalogue order) with their capacity",
+            "operationId": "list_1",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RoomResponse"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/api/reservations/{id}": {
+          "get": {
+            "tags": [
+              "Reservations"
+            ],
+            "summary": "Get reservation detail",
+            "operationId": "detail",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "description": "Reservation id",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "example": 1
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Reservation found",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Reservation"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Reserva no encontrada.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "components": {
+        "schemas": {
+          "CreateReservationRequest": {
+            "type": "object",
+            "description": "Data needed to request a room reservation",
+            "properties": {
+              "organizer": {
+                "type": "string",
+                "description": "Organizer name, required, up to 120 characters",
+                "example": "Ana Torres"
+              },
+              "room": {
+                "type": "string",
+                "default": "Atlas",
+                "description": "Room name (Atlas, Norte or Taller)",
+                "example": "Atlas"
+              },
+              "date": {
+                "type": "string",
+                "default": "2027-04-14",
+                "description": "Date in ISO format yyyy-MM-dd",
+                "example": "2027-04-14"
+              },
+              "slot": {
+                "type": "string",
+                "default": "MORNING",
+                "description": "Half-day slot",
+                "enum": [
+                  "MORNING",
+                  "AFTERNOON"
+                ]
+              },
+              "attendees": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1,
+                "description": "Number of attendees, between 1 and the room capacity",
+                "example": 4
+              }
+            }
+          },
+          "ErrorResponse": {
+            "type": "object",
+            "description": "Standard JSON error body",
+            "properties": {
+              "status": {
+                "type": "integer",
+                "format": "int32",
+                "description": "HTTP status code",
+                "example": 400
+              },
+              "error": {
+                "type": "string",
+                "description": "HTTP reason phrase",
+                "example": "Bad Request"
+              },
+              "message": {
+                "type": "string",
+                "description": "Business message (Spanish, as in the legacy app)",
+                "example": "Sala desconocida."
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Time of the error"
+              }
+            }
+          },
+          "Reservation": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "organizer": {
+                "type": "string"
+              },
+              "room": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "slot": {
+                "type": "string"
+              },
+              "attendees": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          },
+          "RoomResponse": {
+            "type": "object",
+            "description": "Bookable room",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Room name",
+                "example": "Atlas"
+              },
+              "capacity": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Maximum number of attendees",
+                "example": 12
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

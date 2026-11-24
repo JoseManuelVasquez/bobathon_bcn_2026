@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head><title>RoomFlow - Reservas</title><link rel="stylesheet" href="legacy.css"/></h:head>
+<h:body>
+  <div class="header">ROOMFLOW | Reserva de salas | JSF</div><h1>Reservas de espacios</h1>
+  <p>Atlas: 12 plazas · Norte: 8 plazas · Taller: 20 plazas</p><h:messages styleClass="messages"/>
+  <h:form id="filter">
+    <h:outputLabel for="search" value="Sala u organizador: "/><h:inputText id="search" value="#{reservations.search}"/>
+    <h:commandButton value="Buscar"/>
+  </h:form>
+  <h:form id="listing"><h:dataTable value="#{reservations.items}" var="reservation" border="1" cellpadding="8">
+    <h:column><f:facet name="header">ID</f:facet>#{reservation.id}</h:column>
+    <h:column><f:facet name="header">Organizador</f:facet>#{reservation.organizer}</h:column>
+    <h:column><f:facet name="header">Sala</f:facet>#{reservation.room}</h:column>
+    <h:column><f:facet name="header">Fecha</f:facet>#{reservation.date}</h:column>
+    <h:column><f:facet name="header">Franja</f:facet>#{reservation.slot}</h:column>
+    <h:column><f:facet name="header">Estado</f:facet>#{reservation.status}</h:column>
+    <h:column><h:commandLink value="Abrir" action="#{reservations.open(reservation.id)}"/></h:column>
+  </h:dataTable></h:form>
+  <h2>Nueva reserva</h2><h:form id="create"><h:panelGrid columns="2">
+    <h:outputLabel for="organizer" value="Organizador"/><h:inputText id="organizer" value="#{reservations.organizer}" required="true" maxlength="120"/>
+    <h:outputLabel for="room" value="Sala"/><h:selectOneMenu id="room" value="#{reservations.room}"><f:selectItems value="#{reservations.roomNames}"/></h:selectOneMenu>
+    <h:outputLabel for="date" value="Fecha AAAA-MM-DD"/><h:inputText id="date" value="#{reservations.date}" required="true"/>
+    <h:outputLabel for="slot" value="Franja"/><h:selectOneMenu id="slot" value="#{reservations.slot}"><f:selectItem itemValue="MORNING" itemLabel="Mañana"/><f:selectItem itemValue="AFTERNOON" itemLabel="Tarde"/></h:selectOneMenu>
+    <h:outputLabel for="attendees" value="Asistentes"/><h:inputText id="attendees" value="#{reservations.attendees}" required="true"/>
+  </h:panelGrid><h:commandButton value="Crear reserva" action="#{reservations.create}"/></h:form>
+</h:body></html>

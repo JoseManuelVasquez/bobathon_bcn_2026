@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head><title>RoomFlow - Detalle</title><link rel="stylesheet" href="legacy.css"/></h:head>
+<h:body><div class="header">ROOMFLOW | Detalle de reserva | JSF</div>
+  <h:link outcome="index" value="Volver al listado"/><h:messages styleClass="messages"/>
+  <h:panelGroup rendered="#{reservations.selected ne null}">
+    <h1>Reserva ##{reservations.selected.id}</h1><p>Organizador: #{reservations.selected.organizer}</p>
+    <p>Sala: #{reservations.selected.room}</p><p>Fecha: #{reservations.selected.date}</p>
+    <p>Franja: #{reservations.selected.slot}</p><p>Asistentes: #{reservations.selected.attendees}</p>
+    <p>Estado: <strong>#{reservations.selected.status}</strong></p>
+    <h:form id="actions">
+      <h:commandButton value="Confirmar" action="#{reservations.confirm}" disabled="#{reservations.selected.status ne 'REQUESTED'}"/>
+      <h:commandButton value="Cancelar reserva" action="#{reservations.cancel}" disabled="#{reservations.selected.status eq 'CANCELLED'}"/>
+    </h:form>
+  </h:panelGroup>
+  <h:panelGroup rendered="#{reservations.selected eq null}"><p>Selecciona una reserva desde el listado.</p></h:panelGroup>
+</h:body></html>
