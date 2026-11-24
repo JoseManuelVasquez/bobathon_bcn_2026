@@ -142,6 +142,33 @@ button .icon, a .icon { pointer-events: none; }
 .lesson-heading>p { margin: 0 0 32px; max-width: 820px; color: var(--muted); font-size: 17px; line-height: 1.7; }
 .lesson-layout { display: grid; grid-template-columns: minmax(0,1fr) 220px; gap: 42px; align-items: start; }
 .reading-panel { min-width: 0; }
+.milestone-action { padding: 23px 25px; border: 1px solid var(--line); border-left: 3px solid var(--blue); border-radius: 6px; background: var(--soft); }
+.milestone-action>p { font-size: 19px; font-weight: 500; line-height: 1.65; margin: 12px 0 20px; }
+.ide-path { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0; margin: 0; list-style: none; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.ide-path li { display: inline; }
+.ide-path li+li::before { content: '›'; margin-right: 8px; color: var(--blue); }
+.role-summary { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; margin: 25px 0; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.role-summary span { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; letter-spacing: .6px; color: var(--blue); }
+.role-summary .icon { width: 14px; height: 14px; }
+.role-summary p { font-size: 14px; color: var(--muted); line-height: 1.7; margin: 9px 0 0; }
+.expected-result { margin: 15px 0 22px; font-size: 14px; line-height: 1.8; color: var(--muted); }
+.milestone-reference { padding: 0 16px; margin: 22px 0; border: 1px solid var(--line); border-radius: 6px; }
+.milestone-reference>summary { padding: 15px 0; color: var(--blue); font-size: 14px; font-weight: 500; line-height: 1.6; cursor: pointer; }
+.milestone-reference[open] { padding-bottom: 15px; }
+.milestone-reference[open]>summary { margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+.milestone-reference figure { margin: 0; }
+.milestone-reference figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 5px; }
+.milestone-reference figcaption { margin-top: 12px; font-size: 12px; line-height: 1.7; color: var(--muted); }
+.notes-card>summary { display: flex; align-items: center; gap: 7px; cursor: pointer; font-size: 13px; color: var(--blue); }
+.notes-card>summary::after { content: '+'; margin-left: auto; }
+.notes-card[open]>summary::after { content: '−'; }
+.notes-card>summary .icon { width: 16px; height: 16px; }
+.notes-card[open]>summary { margin-bottom: 15px; }
+@media (max-width: 700px) {
+  .role-summary { grid-template-columns: 1fr; gap: 17px; }
+  .milestone-action { padding: 18px; }
+  .milestone-action>p { font-size: 17px; }
+}
 .lesson-aside { display: grid; gap: 22px; position: sticky; top: 82px; padding-left: 20px; border-left: 1px solid var(--line); }
 .aside-eyebrow { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; line-height: 1.6; font-weight: 500; }
 .aside-eyebrow .icon { width: 15px; height: 15px; }

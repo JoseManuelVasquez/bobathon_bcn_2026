@@ -83,6 +83,144 @@ def java_sections(text):
     points += [re.search(rf'(?m)^## {i}\. ',text).start() for i in range(1,8)]
     return [dict(id=m[0],title=m[1],subtitle=m[2],checks=m[3],markdown=text[points[i]:points[i+1] if i+1<len(points) else len(text)].strip(),source='LAB.md') for i,m in enumerate(JAVA_META)]
 
+# The full student guides remain the source of optional commands and reference
+# material. The website follows five decisions/checkpoints, rather than every
+# individual wizard task. sourceIds also keep old bookmarks and notes usable.
+GUIDED_JAVA = [
+ dict(id='explorar', title='Explora el antes', subtitle='Conoce AssetDesk antes de actualizar Java.',
+      action='Abre AssetDesk en Bob y utiliza su terminal para ejecutar la demo con Java 8. Observa cómo se asigna y se devuelve un recurso.',
+      bob='Puede ayudarte a entender el proyecto y los comandos de arranque.',
+      participant='Explora la aplicación y guarda su comportamiento de partida.',
+      expected='La demo parte de 3 recursos disponibles y 1 asignado, pasa a 2 y 2, y termina de nuevo en 3 y 1. Las tres pruebas iniciales pasan.',
+      path=['File → Open Folder', 'work/ · pom.xml', 'Terminal · demo'],
+      sourceIds=['contexto','preparar','referencia'],
+      intro='AssetDesk gestiona el préstamo de recursos compartidos. Es una aplicación de consola con Java 8, Maven y datos en memoria. El reto consiste en llevarla a Java 21 y conservar sus reglas.',
+      details=[('Preparar la copia y consultar los comandos de referencia', ['preparar','referencia'])]),
+ dict(id='analizar', title='Analiza con Bob', subtitle='Entiende una recomendación antes de aplicarla.',
+      action='En Welcome — IBM Bob for Java, pulsa Ask en Analyze and suggest modernization y revisa el análisis de AssetDesk.',
+      bob='Analiza el código y propone oportunidades de modernización.',
+      participant='Contrasta un hallazgo con el archivo al que hace referencia y registra tu decisión.',
+      expected='Puedes explicar qué versión Java y dependencias detectó Bob, y justificar una recomendación con una referencia al código.',
+      path=['Welcome — IBM Bob for Java', 'Analyze and suggest modernization', 'Ask'],
+      sourceIds=['analizar'],
+      intro='Abre en el editor uno de los archivos citados por Bob. Si una explicación no está clara, utiliza el chat con ese archivo como contexto para entenderla.',
+      details=[('Dónde encontrar el análisis y cómo contrastarlo', ['analizar'])]),
+ dict(id='modernizar', title='Sigue el wizard', subtitle='Deja que Bob ejecute la actualización que has elegido.',
+      action='Inicia Java Modernization desde Start Workflow, selecciona Java Upgrade y el destino Java 21. Revisa el plan y sigue las preguntas del wizard.',
+      bob='Modifica Maven y el código, compila y propone correcciones durante el workflow.',
+      participant='Elige el destino, revisa el plan y lee las operaciones que vas a aprobar.',
+      expected='El workflow ha aplicado la actualización y su compilación termina correctamente, o has identificado y documentado un bloqueo concreto.',
+      path=['Start Workflow', 'Java Modernization', 'Java Upgrade → Java 21'],
+      sourceIds=['destino','modernizar'],
+      intro='Mantén el foco en Bob y vuelve a esta guía al alcanzar el checkpoint. Revisa las ediciones del pom.xml en Source Control después de que Bob las aplique.',
+      details=[('Opciones del wizard y revisión de los cambios', ['destino','modernizar'])]),
+ dict(id='comprobar', title='Comprueba el después', subtitle='Verifica el resultado con el Java de destino.',
+      action='Utiliza Java Unit Testing para ampliar las pruebas de ResourceService y vuelve a ejecutar con Java 21 el recorrido de asignación y devolución.',
+      bob='Genera y ejecuta pruebas, y te ayuda a diagnosticar los fallos que aparezcan.',
+      participant='Revisa las salidas y compara los contadores con los que guardaste al principio.',
+      expected='Maven utiliza JDK 21, las pruebas ejecutadas pasan y la demo conserva los contadores 3/1 → 2/2 → 3/1. Distingues los casos ejecutados de los pendientes.',
+      path=['Java Unit Testing', 'ResourceService', 'Terminal · pruebas y demo'],
+      sourceIds=['pruebas','validar'],
+      intro='Comprueba al menos un caso de error, como intentar asignar un recurso ocupado. Contrasta la prueba generada y su resultado; una tarea marcada como terminada necesita una evidencia de ejecución.',
+      details=[('Generar pruebas con el asistente', ['pruebas']), ('Comandos y comprobación de la demo final', ['validar'])]),
+ dict(id='concluir', title='Explica el resultado', subtitle='Cierra el reto con evidencias que puedas mostrar.',
+      action='Revisa con Bob un cambio significativo, contrasta el Mermaid con el código final y guarda tres conclusiones de tu modernización.',
+      bob='Puede ayudarte a resumir los cambios y explicar el diagrama.',
+      participant='Revisa el resumen y presenta qué cambió, qué se conservó y qué queda pendiente.',
+      expected='Puedes mostrar un diff, el resultado de las pruebas y la demo, y un Mermaid revisado. Tus conclusiones distinguen resultados comprobados y pendientes.',
+      path=['Source Control · diff', 'Mermaid · revisión', 'Exportar mi recorrido'],
+      sourceIds=['validar'],
+      intro='Guarda tres conclusiones breves en Tus notas y exporta tu recorrido. Puedes pedir a Bob que te ayude a completar el informe; revisa sus afirmaciones con las salidas de tu ejecución.',
+      markdown='''<details>
+<summary>Resumen detallado, Mermaid e informe ampliado</summary>
+
+Consulta [el análisis de referencia](referencia/ANALISIS-INICIAL.md) y [los diagramas Mermaid de arquitectura](referencia/ARQUITECTURA.md). Contrasta versiones, dependencias y responsabilidades con tu resultado. El diagrama de tareas del workflow y el de arquitectura explican aspectos distintos.
+
+Para conservar un informe ampliado, utiliza `work/docs/INFORME-FINAL.md`. Incluye el análisis, decisiones, cambios, pruebas, Mermaid y pendientes. Anota la versión de Bob y el JDK realmente utilizado.
+
+</details>''', details=[]),
+]
+
+GUIDED_UI = [
+ dict(id='explorar', title='Explora el antes', subtitle='Prueba RoomFlow y guarda tu referencia visual.',
+      action='Abre una variante de RoomFlow en Bob, arráncala y recorre una reserva. Guarda una captura del listado antes de cambiar sus datos.',
+      bob='Puede explicar las pantallas, las reglas y el arranque del proyecto.',
+      participant='Explora búsqueda, detalle y estados de una reserva en la aplicación original.',
+      expected='Has elegido JSF o Struts, conoces el recorrido de Ana y tienes una captura de las cuatro reservas iniciales.',
+      path=['File → Open Folder', 'work/ · JSF o Struts', 'Terminal → navegador'],
+      sourceIds=['contexto','preparacion','preparar','antes'],
+      intro='RoomFlow reserva salas y conserva aforos, estados y conflictos en Java. Vas a utilizar UI Modernization para generar una interfaz React conectada a una API Java.',
+      screenshot='referencia/sesion-bob/antes-listado.png', caption='Referencia del antes: listado Struts. Explora tu variante con sus datos iniciales.',
+      details=[('Preparar y arrancar una sola variante', ['preparacion','preparar','antes']), ('Contexto, datos iniciales y reglas de negocio', ['contexto'])]),
+ dict(id='analizar', title='Analiza con Bob', subtitle='Identifica qué conservará Java y qué asumirá React.',
+      action='Pulsa Ask en Analyze and suggest modernization y revisa cómo Bob interpreta las pantallas y las reglas de RoomFlow.',
+      bob='Analiza el framework, las dependencias y las responsabilidades del código.',
+      participant='Abre una referencia del análisis y comprueba dónde se aplica una regla de reservas.',
+      expected='Puedes localizar una pantalla y una regla de negocio en el código, y explicar su responsabilidad en el resultado esperado.',
+      path=['Welcome — IBM Bob for Java', 'Analyze and suggest modernization', 'Ask'],
+      sourceIds=['analizar'],
+      intro='Elige una regla concreta, como el aforo o el conflicto de sala. Si necesitas entenderla, consulta a Bob con el servicio o la pantalla correspondiente como contexto.',
+      details=[('Revisar el análisis de la aplicación', ['analizar'])]),
+ dict(id='modernizar', title='Sigue el wizard', subtitle='Acompaña la generación de la API y del frontend.',
+      action='Inicia Java Modernization, elige UI Modernization y React, y sigue el wizard hasta completar backend, frontend e integración.',
+      bob='Genera la API, los componentes React y su integración; compila y corrige los errores del workflow.',
+      participant='Revisa el alcance y las decisiones, aprueba las operaciones y comprueba los checkpoints de arranque.',
+      expected='La API y el frontend arrancan con los comandos de tu ejecución, y la UI consulta datos reales de tu API.',
+      path=['Start Workflow', 'Java Modernization → UI Modernization', 'React → backend y frontend'],
+      sourceIds=['wizard','backend','frontend'],
+      intro='Continúa en Bob entre sus subtareas. Cuando el wizard te pida confirmar que un servicio arrancó, abre su URL y compruébalo antes de responder. Usa las carpetas, puertos y comandos que genere tu ejecución.',
+      screenshot='referencia/sesion-bob/07-componentes-home-page.png', caption='Captura del ensayo: Bob avanza por las tareas del frontend. Los nombres y el orden pueden variar según la versión.',
+      details=[('Elegir opciones y revisar aprobaciones', ['wizard']), ('Ayuda para arrancar la API cuando el wizard lo solicite', ['backend']), ('Ayuda para arrancar React y continuar la integración', ['frontend'])]),
+ dict(id='comprobar', title='Comprueba el después', subtitle='Repite el recorrido y demuestra una regla de negocio.',
+      action='En la UI React, recorre una reserva de principio a fin y provoca un rechazo por aforo o conflicto. Compara el antes y el después con los mismos datos.',
+      bob='Ejecuta sus validaciones y puede ayudarte a diagnosticar el caso que falle.',
+      participant='Prueba la aplicación, revisa las peticiones a la API y guarda evidencias del resultado.',
+      expected='Puedes buscar, abrir, crear, confirmar y cancelar una reserva con recarga, y demostrar un rechazo real. Has comparado capturas con el mismo estado de datos.',
+      path=['React · listado y formulario', 'API · respuesta real', 'Antes y después'],
+      sourceIds=['comparacion','validacion'], comparison=True,
+      intro='Empieza con las cuatro reservas iniciales. Registra cada caso como ejecutado correctamente, fallido o no ejecutado. Utiliza Listado en el comparador para ver las mismas cuatro reservas; las vistas de Inicio son referencias de pantallas distintas.',
+      details=[('Casos de prueba y resultados esperados', ['validacion']), ('Más capturas y criterios de comparación', ['comparacion'])]),
+ dict(id='concluir', title='Explica el resultado', subtitle='Presenta tus decisiones y las evidencias de tu ejecución.',
+      action='Revisa con Bob el diff y el Mermaid del resultado, y guarda tres conclusiones sobre la modernización de RoomFlow.',
+      bob='Puede ayudarte a resumir la transformación y explicar las responsabilidades de cada capa.',
+      participant='Contrasta las afirmaciones con el código y las pruebas, y presenta tus conclusiones.',
+      expected='Puedes mostrar una mejora de UI, una regla preservada y un límite pendiente, junto con tus capturas, pruebas y Mermaid revisado.',
+      path=['Source Control · diff', 'Workflow · Mermaid y resumen', 'Exportar mi recorrido'],
+      sourceIds=['conclusiones','entrega'], noteIds=['referencia-tecnica'],
+      intro='Utiliza Tus notas para recoger qué cambió, qué se conservó y qué queda pendiente. Exporta tu recorrido al terminar. El ensayo de referencia sirve para comparar; registra las versiones y resultados de tu propia ejecución.',
+      screenshot='referencia/sesion-bob/09-workflow-completado.png', caption='Referencia del cierre: resumen de tareas de Bob. Contrasta el Mermaid con tu propia ejecución.',
+      details=[('Informe ampliado y plantilla de entrega', ['entrega']), ('Resultados del ensayo de referencia', ['conclusiones']), ('Consulta técnica y resolución de problemas', ['referencia-tecnica'])]),
+]
+
+SUPPORT = '''<details>
+<summary>Si te bloqueas: utiliza el chat de Bob</summary>
+
+Mantén abierto el archivo relevante y aporta el error o la salida de la terminal al chat de Bob. Consulta qué ocurre, revisa la corrección que proponga y deja que la aplique dentro de la tarea. Después vuelve a ejecutar la comprobación que falló.
+
+Si el wizard espera que arranques un servicio en otro terminal, usa el comando y la carpeta que te indique y comprueba la URL. Puedes consultar cómo hacerlo desde el propio IDE.
+
+Si no aparece el flujo, revisa la raíz del proyecto y el paquete instalado. Consulta [cómo iniciar el workflow](https://bob.ibm.com/docs/ide/premium-packages/java-modernization/getting-started) y [los requisitos](https://bob.ibm.com/docs/ide/premium-packages/java-modernization/prerequisites).
+
+</details>'''
+
+def guided_sections(ident, original):
+    by_id = {s['id']: s for s in original}
+    configs = GUIDED_JAVA if ident == 'java' else GUIDED_UI
+    result = []
+    for config in configs:
+        section = {k:v for k,v in config.items() if k not in {'details','intro','markdown'}}
+        parts = [config['intro']]
+        for summary, ids in config['details']:
+            blocks = [by_id[key]['markdown'] for key in ids]
+            parts.append('<details>\n<summary>'+summary+'</summary>\n\n'+'\n\n'.join(blocks)+'\n\n</details>')
+        if config.get('markdown'):parts.append(config['markdown'])
+        parts.append(SUPPORT)
+        section.update(markdown='\n\n'.join(parts), source='LAB.md',
+                       checks=[config['expected']],
+                       legacyTitles={key:by_id[key]['title'] for key in config['sourceIds']+config.get('noteIds',[])})
+        result.append(section)
+    return result
+
 def build():
     pub=ROOT/'public'
     for folder in ['content','media','downloads','resources']:
@@ -93,7 +231,12 @@ def build():
     for ident,name in LABS:
         src=ROOT/'laboratorios'/name
         guide=(src/'LAB.md').read_text()
-        sections=java_sections(guide) if ident=='java' else ui_sections(guide)
+        original=java_sections(guide) if ident=='java' else ui_sections(guide)
+        sections=guided_sections(ident,original)
+        aliases={key:s['id'] for s in sections for key in s['sourceIds']+s.get('noteIds',[])}
+        # The original last Java step included both validation and closure.
+        if ident=='java':aliases['validar']='comprobar'
+        aliases['pasos']='modernizar'
         resources=[];files={};images={}
         for p in sorted(src.rglob('*')):
             if not p.is_file():continue
@@ -117,12 +260,12 @@ def build():
             project='AssetDesk' if ident=='java' else 'RoomFlow',
             stack='Java 8 → Java 21' if ident=='java' else 'JSF / Struts → React',
             description='Lleva una aplicación Java a su siguiente versión y demuestra que el comportamiento se conserva.' if ident=='java' else 'Transforma una interfaz legacy en una experiencia React conectada a una API Java.',
-            sections=sections,resources=resources,images=images,files=files,download='downloads/'+zipname,
+            sections=sections,aliases=aliases,resources=resources,images=images,files=files,download='downloads/'+zipname,
             sourceUrl='https://github.com/JoseManuelVasquez/bobathon_bcn_2026/tree/main/laboratorios/'+name))
     data=dict(title='Bobathon BCN',year='2026',repository='https://github.com/JoseManuelVasquez/bobathon_bcn_2026',courses=courses)
     (pub/'content/courses.json').write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')))
     (pub/'.nojekyll').touch()
-    print('Contenido preparado:',', '.join(f'{c["project"]}: {len(c["sections"])} etapas' for c in courses))
+    print('Contenido preparado:',', '.join(f'{c["project"]}: {len(c["sections"])} hitos' for c in courses))
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--source-root',type=Path)
