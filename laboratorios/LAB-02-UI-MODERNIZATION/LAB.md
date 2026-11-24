@@ -118,7 +118,7 @@ Busca **Ana**, abre la reserva 1 y comprueba sus datos con la tabla del contexto
 
 ### 3. Revisar el análisis de Bob
 
-1. En **Welcome — IBM Bob for Java**, pulsa **Ask** en **Analyze and suggest modernization**.
+1. En **IBM Bob Premium Package for Java**, pulsa **Ask** en **Analyze and suggest modernization**.
 2. Selecciona la copia de trabajo si Bob pregunta por el proyecto.
 3. Contrasta el análisis con la tabla de variantes y las reglas de esta guía.
 4. Revisa framework, dependencias, pantallas, servicio de negocio y límites de los datos en memoria. Anota lo que Bob detecta y lo que no ha comprobado.

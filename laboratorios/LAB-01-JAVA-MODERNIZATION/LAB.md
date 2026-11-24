@@ -36,7 +36,7 @@ Guarda el resultado de las tres pruebas iniciales y comprueba el JSON:
 **Comprobación:** el proyecto compila y el recorrido funciona antes del cambio.
 
 ## 3. Lanzar el análisis incluido en Bob
-1. Abre **Welcome — IBM Bob for Java**, la página de tarjetas que aparece en la captura.
+1. Abre **IBM Bob Premium Package for Java**, la página de tarjetas que aparece en la captura.
 2. Localiza **Analyze and suggest modernization** y pulsa **Ask**.
 3. Si Bob pregunta por el proyecto, selecciona la raíz **`work/`**.
 4. Sigue sus preguntas y espera el resultado.
