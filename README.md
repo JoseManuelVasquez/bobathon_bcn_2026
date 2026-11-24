@@ -6,6 +6,8 @@ Workshop interactivo de modernización con IBM Bob Premium Package for Java.
 
 Dos recorridos para participantes: **AssetDesk, Java 8 → Java 21**, y **RoomFlow, JSF/Struts → React y API Java**. Incluye etapas guiadas, progreso y notas en el navegador, búsqueda, diagramas ampliables, comparador visual y descargas de los laboratorios.
 
+La vista general contiene únicamente los dos retos. La presentación sigue el estilo de la documentación de Bob y permite elegir **Light, Dark o System**; la elección se conserva en el navegador. La comparación visual está en la etapa correspondiente del reto de UI.
+
 ## Preparar y ejecutar la web
 
 Necesitas Node compatible con Vite y Python 3. La versión inicial se compiló con Node 24.
@@ -39,4 +41,4 @@ El resultado de producción está en **`docs/`**. Pages publica la rama **`main`
 
 La web aloja la guía y las interacciones del navegador. Los proyectos Java y sus APIs se ejecutan en el equipo del participante, siguiendo cada laboratorio. Progreso y notas se guardan en el navegador; se pueden exportar a Markdown.
 
-Las aplicaciones y datos del workshop son ficticios. Las evidencias de la sesión de referencia se distinguen de los resultados que cada participante debe comprobar. La fuente Manrope se distribuye con su licencia en `docs/licenses/`.
+Las aplicaciones y datos del workshop son ficticios. Las evidencias de la sesión de referencia se distinguen de los resultados que cada participante debe comprobar. Las fuentes IBM Plex Sans e IBM Plex Mono se distribuyen con sus licencias en `docs/licenses/`. El icono de Bob procede de la [documentación oficial](https://bob.ibm.com/icon.svg?v=1).

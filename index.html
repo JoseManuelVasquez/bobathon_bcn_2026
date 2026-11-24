@@ -3,10 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f5f6ef" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="description" content="Tu workshop de modernización con IBM Bob: Java 8 a Java 21 y de JSF o Struts a React. Sigue los laboratorios, compara resultados y guarda tus conclusiones." />
-    <title>Bobathon BCN 2026 · Tu siguiente versión</title>
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>Bobathon BCN 2026 · Retos del workshop</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=bob" />
+    <link rel="alternate icon" href="./favicon.ico?v=bob" sizes="32x32" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <script>
+      try {
+        const preference = JSON.parse(localStorage.getItem('bobathon-bcn-2026:workshop:v1') || '{}').theme || 'system';
+        document.documentElement.dataset.theme = preference === 'dark' || (preference === 'system' && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      } catch {}
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Saltar al contenido</a>
