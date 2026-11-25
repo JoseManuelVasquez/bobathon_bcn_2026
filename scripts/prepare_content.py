@@ -265,7 +265,7 @@ def build():
     data=dict(title='Bobathon BCN',year='2026',repository='https://github.com/JoseManuelVasquez/bobathon_bcn_2026',courses=courses)
     (pub/'content/courses.json').write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')))
     (pub/'.nojekyll').touch()
-    print('Contenido preparado:',', '.join(f'{c["project"]}: {len(c["sections"])} hitos' for c in courses))
+    print('Contenido preparado:',', '.join(f'{c["project"]}: {len(c["sections"])} pasos' for c in courses))
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--source-root',type=Path)
