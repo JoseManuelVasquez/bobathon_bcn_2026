@@ -2,13 +2,13 @@
 
 **Caso ficticio y agnóstico:** una organización presta recursos compartidos a sus equipos: portátiles, proyectores, kits de pruebas y equipos de videoconferencia. AssetDesk consulta el catálogo, asigna un recurso y lo devuelve.
 
-El ejercicio consiste en **manejar el asistente de Bob Premium Package for Java**, revisar sus decisiones y comprobar el resultado. El punto de partida es Java 8, Maven, salida JSON y tres pruebas JUnit 4. No necesita base de datos ni servidor.
+El ejercicio usa **IBM Bob Premium Package for Java** para remediar una dependencia y actualizar Java. El punto de partida es Java 8, Maven, salida JSON y cinco pruebas JUnit 4. No necesita base de datos ni servidor.
 
 ## Empieza aquí
 
-1. Ejecuta `bash scripts/preparar.sh` desde esta carpeta.
+1. Abre esta carpeta en IBM Bob y copia el [prompt de arranque](LAB.md#1-preparar-y-abrir) al chat. Bob prepara `work/` y ejecuta la demo.
 2. Abre **`work/`**, la carpeta con el `pom.xml`, en IBM Bob.
-3. Sigue [LAB.md](LAB.md): **Ask → análisis → Start → Java Upgrade → Java 21 → Continue → validación**.
+3. Sigue [LAB.md](LAB.md) para analizar el proyecto, remediar la dependencia y actualizar a Java 21.
 
 ## Material incluido
 

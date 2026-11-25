@@ -81,17 +81,17 @@ Los comandos siguientes se ejecutan en la terminal de Bob. Las versiones, rutas 
 
 ## Pasos del laboratorio
 
-### 1. Preparar una variante y abrirla
+### 1. Preparar y arrancar una variante con Bob
 
-Desde la carpeta de este laboratorio:
+Abre en IBM Bob la carpeta descomprimida del laboratorio, la que contiene `legacy-jsf/` y `legacy-struts/`. Copia este prompt y cambia **JSF** por **Struts** si prefieres esa variante.
 
-```bash
-bash scripts/preparar.sh struts
+```prompt
+Prepara y arranca RoomFlow en la variante JSF. Identifica mi sistema operativo y mi terminal. Usa los comandos adecuados para Windows, macOS o Linux.
+
+Si work/ no existe, copia solo la variante elegida siguiendo scripts/preparar.sh, y prepara back/, front/ y el informe. Si work/ ya existe, protégelo. Si su pom.xml corresponde a otra variante, avísame y espera.
+
+Comprueba que Maven utiliza un JDK 8 y que el puerto 8085 está libre. Si hay un bloqueo, dime cuál es y espera. Desde work/, ejecuta mvn clean package y arranca mvn jetty:run en una terminal integrada que se mantenga abierta, en localhost. Comprueba que responde la aplicación y muéstrame la URL de entrada de mi variante. Conserva el código y las dependencias de partida.
 ```
-
-Sustituye `struts` por `jsf` si eliges JSF. El script crea `work/` con una sola variante y `docs/INFORME-FINAL.md`. También crea `back/` y `front/` como destinos opcionales si el wizard los solicita.
-
-**Si ya existe `work/`, el script lo conserva.** Comprueba qué variante contiene y continúa con ella; para una práctica nueva, conserva tu trabajo anterior en otra ubicación antes de volver a preparar.
 
 Abre **File → Open Folder → `work/`** en Bob. Comprueba que ves el `pom.xml` y las fuentes de la variante elegida. Git Flow es opcional; si decides utilizarlo, prepara un repositorio con commit inicial antes de entrar en el wizard.
 
@@ -99,14 +99,7 @@ Abre **File → Open Folder → `work/`** en Bob. Comprueba que ves el `pom.xml`
 
 ### 2. Recorrer y fotografiar el antes
 
-Con JDK 8, dentro de `work/`:
-
-```bash
-mvn clean package
-mvn jetty:run
-```
-
-Abre `/roomflow/index.xhtml` para JSF o `/roomflow/reservations.action` para Struts en `http://localhost:8085`.
+Abre la URL que te dio Bob. La ruta de referencia es `/roomflow/index.xhtml` para JSF o `/roomflow/reservations.action` para Struts en `http://localhost:8085`.
 
 Localiza búsqueda, tabla, enlace **Abrir** y formulario **Nueva reserva**. **Guarda una captura antes de modificar los datos.** Esta es la referencia JSF aportada:
 

@@ -28,7 +28,7 @@ Los métodos de consulta devuelven copias. Las operaciones del servicio están s
 
 ## Inventario inicial
 
-Java 8; Maven; Gson 2.8.9; JUnit 4.13.2; plugins Compiler 3.8.1, Surefire 2.22.2 y Shade 3.2.4. El modelo utiliza `java.util.Date` y cadenas para los estados. Esto no implica que el wizard deba reemplazarlos para actualizar Java.
+El proyecto usa Java 8, Maven, Gson 2.8.9 y los plugins Compiler 3.8.1, Surefire 2.22.2 y Shade 3.2.4. Las pruebas usan JUnit 4.13.2 y Commons Lang 3.17.0. El modelo utiliza `java.util.Date` y cadenas para los estados.
 
 No hay Spring, Java EE, interfaces web ni datasource. El alcance principal es el JDK, la cadena de build, sus dependencias y la conservación del comportamiento.
 
@@ -36,7 +36,7 @@ No hay Spring, Java EE, interfaces web ni datasource. El alcance principal es el
 
 Inicialmente: cuatro recursos, tres disponibles, uno asignado. Asignar el recurso 1 deja dos disponibles y dos asignados. Devolverlo restaura tres disponibles y uno asignado.
 
-Las tres pruebas iniciales cubren contadores, asignación/devolución y rechazo de un recurso ocupado. Se pueden ampliar desde Java Unit Testing con equipo vacío, ID desconocido y devolución inválida.
+Las cinco pruebas iniciales cubren los contadores, la asignación y devolución, el rechazo de un recurso ocupado, el inventario JSON y el mensaje de uso del CLI. En Java Unit Testing puedes ampliar la cobertura con equipo vacío, ID desconocido y devolución inválida.
 
 ## Revisión de modernización
 

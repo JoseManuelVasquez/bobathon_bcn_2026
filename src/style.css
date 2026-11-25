@@ -214,6 +214,7 @@ button .icon, a .icon { pointer-events: none; }
 .markdown-body code { font-family: 'IBM Plex Mono', monospace; font-size: .84em; border: 1px solid var(--line); background: var(--code); padding: 1px 5px; border-radius: 3px; }
 .markdown-body pre { position: relative; overflow: auto; max-width: 100%; margin: 22px 0 26px; padding: 45px 18px 18px; background: var(--code); color: var(--ink); border: 1px solid var(--line); border-radius: 7px; font-size: 13px; line-height: 1.85; }
 .markdown-body pre code { color: inherit; font-size: inherit; background: none; border: 0; padding: 0; white-space: pre; }
+.markdown-body .prompt-block code { white-space: pre-wrap; overflow-wrap: anywhere; }
 .copy-code { display: flex; align-items: center; gap: 5px; position: absolute; top: 8px; right: 9px; padding: 4px 8px; color: var(--muted); background: var(--paper); border: 1px solid var(--line); border-radius: 4px; font-size: 11px; line-height: 1.5; }
 .copy-code .icon { width: 12px; height: 12px; }
 .copy-code:hover { background: var(--hover); color: var(--ink); }

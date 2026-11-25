@@ -93,7 +93,15 @@ function markdown(c,source,text) {
       figure.append(diagram);pre.replaceWith(figure);
     } else {
       pre.classList.add('code-block');
-      const button=document.createElement('button');button.className='copy-code';button.dataset.action='copy-code';button.innerHTML=icon('copy')+'<span>Copiar</span>';button.setAttribute('aria-label','Copiar el código');pre.prepend(button);
+      const isPrompt=code?.classList.contains('language-prompt');
+      if(isPrompt)pre.classList.add('prompt-block');
+      const button=document.createElement('button');
+      button.className='copy-code';
+      button.dataset.action='copy-code';
+      button.dataset.label=isPrompt?'Copiar prompt':'Copiar';
+      button.innerHTML=icon('copy')+'<span>'+button.dataset.label+'</span>';
+      button.setAttribute('aria-label',isPrompt?'Copiar prompt':'Copiar el código');
+      pre.prepend(button);
     }
   });
   const wrapper=document.createElement('div');wrapper.append(template.content);return wrapper.innerHTML;
@@ -198,7 +206,7 @@ async function copyCode(button) {
   try {copied=document.execCommand('copy');} catch {copied=false;}
   helper.remove();button.focus({preventScroll:true});
  }
- if(copied){button.innerHTML=icon('check')+'<span>Copiado</span>';setTimeout(()=>{if(button.isConnected)button.innerHTML=icon('copy')+'<span>Copiar</span>';},1800);}
+ if(copied){button.innerHTML=icon('check')+'<span>Copiado</span>';setTimeout(()=>{if(button.isConnected)button.innerHTML=icon('copy')+'<span>'+button.dataset.label+'</span>';},1800);}
  else {const range=document.createRange();range.selectNodeContents(button.closest('pre').querySelector('code'));const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);toast('Código seleccionado. Usa el atajo de copiar de tu equipo.');}
 }
 function switchComparison(button) {

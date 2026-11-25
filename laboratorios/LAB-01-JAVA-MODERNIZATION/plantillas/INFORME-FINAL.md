@@ -29,6 +29,9 @@ Enlazar los diagramas revisados y explicar qué cambió. Identificar por separad
 
 ## 6. Validaciones
 
+- Dependencia, CVE y cambio de versión:
+- Resultado del escaneo antes y después:
+
 | Caso | Resultado real | Evidencia | Estado |
 | --- | --- | --- | --- |
 | Build inicial | PENDIENTE | PENDIENTE | NO EJECUTADO |
