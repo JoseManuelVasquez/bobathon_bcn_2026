@@ -11,11 +11,7 @@ AssetDesk contiene **cuatro recursos: tres disponibles y uno asignado**. La demo
 Abre en IBM Bob la carpeta descomprimida del laboratorio, la que contiene `legacy/`. Copia este prompt y pégalo en el chat de Bob.
 
 ```prompt
-Prepara y ejecuta la demo de AssetDesk en esta carpeta. Identifica mi sistema operativo y mi terminal. Usa los comandos adecuados para Windows, macOS o Linux.
-
-Si work/ no existe, prepara una copia de legacy/ siguiendo scripts/preparar.sh y crea el informe desde la plantilla. Si work/ ya existe, verifica que contiene el pom.xml de AssetDesk y conserva mi trabajo.
-
-Comprueba que Maven utiliza un JDK 8. Si falta Java o Maven, dime qué falta y espera. En work/, ejecuta mvn clean verify y después java -jar target/assetdesk.jar demo. Muéstrame las pruebas y los contadores de la demo. Conserva el código y las versiones de partida.
+Prepara y ejecuta la demo de AssetDesk con Java 8 siguiendo LAB.md. Identifica mi sistema operativo y mi terminal. Muéstrame el resultado de las pruebas y de la demo.
 ```
 
 Cuando termine la demo, abre `work/` en Bob con **File → Open Folder** para que el asistente trabaje sobre el `pom.xml` de AssetDesk.
@@ -23,7 +19,10 @@ Cuando termine la demo, abre `work/` en Bob con **File → Open Folder** para qu
 Comprueba que tienes JDK 8 y 21, Maven y el paquete Premium de Bob disponibles. Si eliges Git Flow, prepara un repositorio con commit inicial.
 
 ## 2. Observar la referencia
-Estos son los comandos de referencia que ejecuta Bob desde `work/` con JDK 8.
+
+Para preparar la copia, Bob puede adaptar los pasos de `scripts/preparar.sh` a la terminal que detecte. Si `work/` ya existe, comprueba que contiene el POM de AssetDesk y conserva esa copia. Si falta JDK 8 o Maven, resuelve ese bloqueo antes de ejecutar la demo.
+
+Bob ejecuta estos comandos desde `work/` con JDK 8, conservando el código y las versiones de partida.
 
 ```bash
 mvn clean verify

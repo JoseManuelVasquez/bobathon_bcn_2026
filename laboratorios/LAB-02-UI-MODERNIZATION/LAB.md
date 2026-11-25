@@ -86,11 +86,7 @@ Los comandos siguientes se ejecutan en la terminal de Bob. Las versiones, rutas 
 Abre en IBM Bob la carpeta descomprimida del laboratorio, la que contiene `legacy-jsf/` y `legacy-struts/`. Copia este prompt y cambia **JSF** por **Struts** si prefieres esa variante.
 
 ```prompt
-Prepara y arranca RoomFlow en la variante JSF. Identifica mi sistema operativo y mi terminal. Usa los comandos adecuados para Windows, macOS o Linux.
-
-Si work/ no existe, copia solo la variante elegida siguiendo scripts/preparar.sh, y prepara back/, front/ y el informe. Si work/ ya existe, protégelo. Si su pom.xml corresponde a otra variante, avísame y espera.
-
-Comprueba que Maven utiliza un JDK 8 y que el puerto 8085 está libre. Si hay un bloqueo, dime cuál es y espera. Desde work/, ejecuta mvn clean package y arranca mvn jetty:run en una terminal integrada que se mantenga abierta, en localhost. Comprueba que responde la aplicación y muéstrame la URL de entrada de mi variante. Conserva el código y las dependencias de partida.
+Prepara y arranca RoomFlow en la variante JSF siguiendo LAB.md. Identifica mi sistema operativo y mi terminal. Dime el puerto y la URL local.
 ```
 
 Abre **File → Open Folder → `work/`** en Bob. Comprueba que ves el `pom.xml` y las fuentes de la variante elegida. Git Flow es opcional; si decides utilizarlo, prepara un repositorio con commit inicial antes de entrar en el wizard.
@@ -98,6 +94,8 @@ Abre **File → Open Folder → `work/`** en Bob. Comprueba que ves el `pom.xml`
 **Resultado:** una copia de trabajo identificada y un informe pendiente de completar.
 
 ### 2. Recorrer y fotografiar el antes
+
+Como referencia para Bob, `scripts/preparar.sh` copia la variante elegida a `work/` y prepara `back/`, `front/` y el informe. Si `work/` ya existe, comprueba su variante y conserva la copia. Con Maven usando JDK 8 y el puerto 8085 libre, Bob puede ejecutar `mvn clean package` y mantener `mvn jetty:run` en una terminal integrada para que la aplicación siga activa en localhost. El arranque de referencia conserva el código y las dependencias de partida.
 
 Abre la URL que te dio Bob. La ruta de referencia es `/roomflow/index.xhtml` para JSF o `/roomflow/reservations.action` para Struts en `http://localhost:8085`.
 
