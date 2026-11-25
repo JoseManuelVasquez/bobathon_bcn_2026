@@ -4,7 +4,18 @@ from pathlib import Path
 import argparse, hashlib, json, re, shutil, zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-LABS = [('java', 'LAB-01-JAVA-MODERNIZATION'), ('ui', 'LAB-02-UI-MODERNIZATION')]
+LABS = [
+    dict(id='java', folder='LAB-01-JAVA-MODERNIZATION', number='01', title='Modernización Java',
+         project='AssetDesk', stack='Java 8 → Java 21', download='downloads/lab-01-java.zip',
+         description='Lleva una aplicación Java a su siguiente versión y demuestra que el comportamiento se conserva.'),
+    dict(id='ui', folder='LAB-02-UI-MODERNIZATION', number='02', title='Modernización de UI',
+         project='RoomFlow', stack='JSF / Struts → React', download='downloads/lab-02-ui.zip',
+         description='Transforma una interfaz legacy en una experiencia React conectada a una API Java.'),
+    dict(id='security', folder='LAB-03-JAVA-VULNERABILITY-REMEDIATION', number='03',
+         title='Java Vulnerability Remediation', project='Nexo CRM', stack='Java EE 8 · Open Liberty',
+         download='downloads/lab-03-security.zip',
+         description='Corrige una dependencia de un CRM y comprueba que su cartera comercial sigue funcionando.'),
+]
 EXCLUDE = {'work', 'target', 'node_modules', '.git', '.idea', '.bob', '.vscode', '__pycache__', 'INSTRUCTOR.md', '.DS_Store'}
 
 def participant_text(text):
@@ -15,7 +26,8 @@ def participant_text(text):
     return text
 
 def import_labs(source_root):
-    for _, name in LABS:
+    for lab in LABS:
+        name = lab['folder']
         src = source_root / name
         dest = ROOT / 'laboratorios' / name
         if not (src / 'LAB.md').is_file():
@@ -82,6 +94,14 @@ def java_sections(text):
     points=[re.search(r'(?m)^## Objetivo',text).start()]
     points += [re.search(rf'(?m)^## {i}\. ',text).start() for i in range(1,8)]
     return [dict(id=m[0],title=m[1],subtitle=m[2],checks=m[3],markdown=text[points[i]:points[i+1] if i+1<len(points) else len(text)].strip(),source='LAB.md') for i,m in enumerate(JAVA_META)]
+
+def security_sections(text):
+    steps = re.split(r'(?m)^## \d+\. ', text)[1:]
+    ids = ('preparar', 'escanear', 'remediar', 'validar', 'entregar')
+    if len(steps) != len(ids):
+        raise SystemExit('La guía de Nexo CRM debe tener cinco pasos numerados.')
+    return [dict(id=ident, title=step.splitlines()[0], markdown=step.partition('\n')[2].strip())
+            for ident, step in zip(ids, steps)]
 
 # The full student guides remain the source of optional commands and reference
 # material. The website follows five decisions/checkpoints, rather than every
@@ -194,6 +214,52 @@ GUIDED_UI = [
       details=[('Informe ampliado y plantilla de entrega', ['entrega']), ('Resultados del ensayo de referencia', ['conclusiones']), ('Consulta técnica y resolución de problemas', ['referencia-tecnica'])]),
 ]
 
+GUIDED_SECURITY = [
+    dict(id='explorar', title='Explora el antes', subtitle='Arranca Nexo CRM y guarda las cifras iniciales.',
+         action='Abre la carpeta del laboratorio en Bob y pega el prompt de abajo en su chat.',
+         bob='Identifica tu entorno, prepara la copia de trabajo y arranca el CRM en local.',
+         participant='Abre la URL, revisa las cuentas y marca una oportunidad como ganada.',
+         expected='Has abierto Nexo CRM y comprobado que la cartera baja de 38.900 € a 20.500 € al cerrar la oportunidad de referencia.',
+         path=['File → Open Folder', 'Chat de Bob · prompt', 'Navegador · cartera'],
+         screenshot='referencia/nexo-crm.png',
+         caption='Nexo CRM en una sesión nueva, con cuatro oportunidades y tres cuentas de ejemplo.',
+         sourceIds=['preparar'], intro='', introIds=['preparar'], details=[]),
+    dict(id='analizar', title='Encuentra el aviso', subtitle='Identifica el aviso en el POM de Nexo CRM.',
+         action='Escribe Java Vulnerability Remediation en el chat de Bob y abre el hallazgo de Commons IO.',
+         bob='Escanea las dependencias Maven y muestra los avisos de OSV.',
+         participant='Registra el CVE, la versión que tienes y dónde se usa la dependencia.',
+         expected='Has localizado CVE-2024-47554 en Commons IO 2.13.0 y confirmado el alcance test.',
+         path=['Chat de Bob', 'Java Vulnerability Remediation', 'Resultado del escaneo'],
+         sourceIds=['escanear'], intro='', introIds=['escanear'], details=[]),
+    dict(id='modernizar', title='Aplica la remediación', subtitle='Actualiza la dependencia con el paquete Premium.',
+         action='Pide a Bob que remedie el hallazgo y revisa la versión que propone antes de aplicar el cambio.',
+         bob='Propone y aplica la actualización en Maven.',
+         participant='Comprueba el diff y conserva la dependencia con alcance test.',
+         expected='El POM declara una versión compatible que corrige el aviso y mantiene el alcance test.',
+         path=['Java Vulnerability Remediation', 'Corrección propuesta', 'Source Control · pom.xml'],
+         sourceIds=['remediar'], intro='', introIds=['remediar'], details=[]),
+    dict(id='comprobar', title='Comprueba el después', subtitle='Repite el escaneo y valida la cartera comercial.',
+         action='Ejecuta las pruebas, repite Java Vulnerability Remediation y vuelve a abrir el CRM.',
+         bob='Ayuda a ejecutar Maven y muestra el resultado del nuevo escaneo.',
+         participant='Compara el aviso, las pruebas y el cierre de la oportunidad con el estado inicial.',
+         expected='Pasan las tres pruebas, el aviso del ejercicio ya no aparece y el cierre conserva los importes esperados.',
+         path=['Maven · verify', 'Segundo escaneo', 'Navegador · cartera'],
+         sourceIds=['validar'], intro='', introIds=['validar'], details=[]),
+    dict(id='concluir', title='Explica el resultado', subtitle='Documenta lo que cambió y lo que verificaste.',
+         action='Guarda el aviso, el cambio del POM y las evidencias de verificación.',
+         bob='Puede resumir la actualización y los resultados de las pruebas.',
+         participant='Contrasta el resumen con el diff, la salida de Maven y el segundo escaneo.',
+         expected='Puedes mostrar qué versión se actualizó, cómo comprobaste el aviso y qué comportamiento del CRM verificaste.',
+         path=['Source Control · diff', 'Tus notas', 'Exportar mi recorrido'],
+         sourceIds=['entregar'], intro='', introIds=['entregar'], details=[]),
+]
+
+COURSE_CONTENT = {
+    'java': (java_sections, GUIDED_JAVA),
+    'ui': (ui_sections, GUIDED_UI),
+    'security': (security_sections, GUIDED_SECURITY),
+}
+
 SUPPORT = '''<details>
 <summary>Si te bloqueas: utiliza el chat de Bob</summary>
 
@@ -205,13 +271,12 @@ Si no aparece el flujo, revisa la raíz del proyecto y el paquete instalado. Con
 
 </details>'''
 
-def guided_sections(ident, original):
+def guided_sections(configs, original):
     by_id = {s['id']: s for s in original}
-    configs = GUIDED_JAVA if ident == 'java' else GUIDED_UI
     result = []
     for config in configs:
         section = {k:v for k,v in config.items() if k not in {'details','intro','introIds','markdown'}}
-        parts = [config['intro']]
+        parts = [config['intro']] if config['intro'] else []
         parts.extend(by_id[key]['markdown'] for key in config.get('introIds', []))
         for summary, ids in config['details']:
             blocks = [by_id[key]['markdown'] for key in ids]
@@ -231,18 +296,20 @@ def build():
         if p.exists():shutil.rmtree(p)
         p.mkdir(parents=True)
     courses=[]
-    for ident,name in LABS:
+    for lab in LABS:
+        ident, name = lab['id'], lab['folder']
         src=ROOT/'laboratorios'/name
         guide=(src/'LAB.md').read_text()
-        original=java_sections(guide) if ident=='java' else ui_sections(guide)
-        sections=guided_sections(ident,original)
+        parse_sections, configs = COURSE_CONTENT[ident]
+        sections=guided_sections(configs,parse_sections(guide))
         aliases={key:s['id'] for s in sections for key in s['sourceIds']+s.get('noteIds',[])}
         # The original last Java step included both validation and closure.
         if ident=='java':aliases['validar']='comprobar'
         aliases['pasos']='modernizar'
         resources=[];files={};images={}
-        for p in sorted(src.rglob('*')):
-            if not p.is_file():continue
+        source_files = [p for p in sorted(src.rglob('*')) if p.is_file()
+                        and EXCLUDE.isdisjoint(p.relative_to(src).parts)]
+        for p in source_files:
             rel=p.relative_to(src).as_posix()
             if p.suffix=='.md':
                 if rel not in {'LAB.md','README.md'}:
@@ -254,16 +321,10 @@ def build():
             elif p.suffix in {'.json','.txt','.mmd'}:
                 out=pub/'resources'/ident/rel;out.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,out)
                 files[rel]=out.relative_to(pub).as_posix()
-        zipname='lab-01-java.zip' if ident=='java' else 'lab-02-ui.zip'
-        with zipfile.ZipFile(pub/'downloads'/zipname,'w',zipfile.ZIP_DEFLATED) as z:
-            for p in sorted(src.rglob('*')):
-                if p.is_file():z.write(p,Path(name)/p.relative_to(src))
-        courses.append(dict(id=ident,folder=name,number='01' if ident=='java' else '02',
-            title='Modernización Java' if ident=='java' else 'Modernización de UI',
-            project='AssetDesk' if ident=='java' else 'RoomFlow',
-            stack='Java 8 → Java 21' if ident=='java' else 'JSF / Struts → React',
-            description='Lleva una aplicación Java a su siguiente versión y demuestra que el comportamiento se conserva.' if ident=='java' else 'Transforma una interfaz legacy en una experiencia React conectada a una API Java.',
-            sections=sections,aliases=aliases,resources=resources,images=images,files=files,download='downloads/'+zipname,
+        with zipfile.ZipFile(pub/lab['download'],'w',zipfile.ZIP_DEFLATED) as z:
+            for p in source_files:
+                z.write(p,Path(name)/p.relative_to(src))
+        courses.append(dict(**lab, sections=sections,aliases=aliases,resources=resources,images=images,files=files,
             sourceUrl='https://github.com/JoseManuelVasquez/bobathon_bcn_2026/tree/main/laboratorios/'+name))
     data=dict(title='Bobathon BCN',year='2026',repository='https://github.com/JoseManuelVasquez/bobathon_bcn_2026',courses=courses)
     (pub/'content/courses.json').write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')))

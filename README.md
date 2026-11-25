@@ -4,13 +4,13 @@ Workshop interactivo de modernización con IBM Bob Premium Package for Java.
 
 **Web:** https://JoseManuelVasquez.github.io/bobathon_bcn_2026/
 
-Dos recorridos para participantes: **AssetDesk, Java 8 → Java 21**, y **RoomFlow, JSF/Struts → React y API Java**. Cada reto tiene cinco pasos: **explorar, analizar, modernizar, comprobar y concluir**. Incluye progreso y notas en el navegador, búsqueda, diagramas ampliables, comparador visual y descargas de los laboratorios.
+Tres recorridos para participantes: **AssetDesk, Java 8 → Java 21**, **RoomFlow, JSF/Struts → React y API Java** y **Nexo CRM, remediación de dependencias en Java EE 8**. Cada reto tiene cinco pasos: **explorar, analizar, modernizar, comprobar y concluir**. Incluye progreso y notas en el navegador, búsqueda, diagramas ampliables, comparador visual y descargas de los laboratorios.
 
 El wizard de Bob conduce la práctica. En cada paso encontrarás una acción principal, qué hace Bob, qué revisas tú y un resultado esperado. Los comandos, las capturas de referencia y la ayuda técnica están en desplegables. Si surge una incidencia, utiliza el chat del IDE con el error y los archivos relevantes como contexto.
 
 El primer paso de cada laboratorio incluye su descarga y el acceso a las fuentes. Las notas y la exportación están disponibles durante el recorrido; puedes reiniciar el progreso desde el último paso. Los enlaces antiguos a Material y descargas abren la vista general.
 
-La vista general contiene únicamente los dos retos. La presentación sigue el estilo de la documentación de Bob y permite elegir **Light, Dark o System**; la elección se conserva en el navegador. La comparación visual está en la etapa correspondiente del reto de UI.
+La vista general muestra los tres retos. La presentación sigue el estilo de la documentación de Bob y permite elegir **Light, Dark o System**; la elección se conserva en el navegador. La comparación visual está en la etapa correspondiente del reto de UI.
 
 ## Preparar y ejecutar la web
 
@@ -30,7 +30,7 @@ Los Markdown de `laboratorios/` son la fuente del contenido del workshop. Edita 
 npm run build
 ```
 
-`prepare_content.py` agrupa las guías en cinco pasos por reto, prepara las imágenes y crea los ZIP de los laboratorios. `GUIDED_JAVA` y `GUIDED_UI` definen las acciones principales y los checkpoints; los detalles se extraen de las guías completas de `laboratorios/`. Los ZIP conservan esas guías y excluyen copias de trabajo, builds y configuración local. Para importar una nueva copia de los dos laboratorios desde otro directorio:
+`prepare_content.py` agrupa las guías en cinco pasos por reto, prepara las imágenes y crea los ZIP de los laboratorios. `COURSE_CONTENT` asocia cada reto con sus acciones principales y checkpoints. Los detalles se extraen de las guías completas de `laboratorios/`. Los ZIP conservan esas guías y excluyen copias de trabajo, builds y configuración local. Para importar una nueva copia de los laboratorios desde otro directorio:
 
 ```bash
 python3 scripts/prepare_content.py --source-root /ruta/al/material

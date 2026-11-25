@@ -114,7 +114,7 @@ button .icon, a .icon { pointer-events: none; }
 .page-shell { margin-left: var(--sidebar-width); padding-top: var(--header-height); min-height: 100vh; }
 .main-content { max-width: 1320px; margin: 0 auto; padding: 40px 48px; }
 .home-content { padding-top: 44px; }
-.lab-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
+.lab-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,270px),1fr)); gap: 22px; }
 .lab-card { display: block; min-width: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 9px; padding: 25px 25px 0; overflow: hidden; transition: border-color .15s, background .15s; }
 .lab-card:hover { border-color: var(--blue); background: var(--sidebar); }
 .card-eyebrow { display: flex; align-items: center; gap: 11px; color: var(--muted); font-size: 11px; font-weight: 500; letter-spacing: .7px; }
