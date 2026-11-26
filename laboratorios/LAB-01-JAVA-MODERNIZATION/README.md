@@ -2,13 +2,13 @@
 
 **Caso ficticio y agnóstico:** una organización presta recursos compartidos a sus equipos: portátiles, proyectores, kits de pruebas y equipos de videoconferencia. AssetDesk consulta el catálogo, asigna un recurso y lo devuelve.
 
-El ejercicio usa **IBM Bob Premium Package for Java** para remediar una dependencia y actualizar Java. El punto de partida es Java 8, Maven, salida JSON y cinco pruebas JUnit 4. No necesita base de datos ni servidor.
+Primero ejecuta la demo original de AssetDesk. Después pulsa **Start** en **Java Upgrade** dentro de IBM Bob Premium Package for Java. El punto de partida es Java 8, Maven, salida JSON y cinco pruebas JUnit 4. No necesita base de datos ni servidor.
 
 ## Empieza aquí
 
-1. Abre esta carpeta en IBM Bob y copia el [prompt de arranque](LAB.md#1-preparar-y-abrir) al chat. Bob prepara `work/` y ejecuta la demo.
+1. Abre esta carpeta en IBM Bob y copia el [prompt de arranque](LAB.md#1-arrancar-assetdesk-legacy) al chat. Bob prepara `work/` y ejecuta la demo.
 2. Abre **`work/`**, la carpeta con el `pom.xml`, en IBM Bob.
-3. Sigue [LAB.md](LAB.md) para analizar el proyecto, remediar la dependencia y actualizar a Java 21.
+3. Sigue [LAB.md](LAB.md) para analizar el proyecto, abrir el wizard de Java Upgrade y verificar la demo después del cambio.
 
 ## Material incluido
 

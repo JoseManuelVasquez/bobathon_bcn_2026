@@ -17,7 +17,7 @@ En este workshop analizarás RoomFlow, modernizarás su interfaz con Bob y compr
 
 RoomFlow es una aplicación ficticia para reservar salas de reuniones, formación o trabajo en equipo. Tu reto es renovar su interfaz y conservar las reglas que permiten solicitar, confirmar y cancelar reservas.
 
-El objetivo es usar **UI Modernization de Bob Premium Package for Java** para separar una interfaz JSF o Struts en un frontend React y una API Java. Seguirás las opciones y preguntas del wizard, revisarás sus cambios y demostrarás que las reglas de reservas se conservan.
+El primer objetivo es **arrancar RoomFlow legacy** en JSF o Struts y comprobar en el navegador que puedes abrir una reserva. Guarda una captura del estado inicial. Después, pulsa **Start** en **UI Modernization** y sigue el asistente para separar la interfaz React de la API Java.
 
 ```mermaid
 flowchart LR
@@ -81,7 +81,7 @@ Los comandos siguientes se ejecutan en la terminal de Bob. Las versiones, rutas 
 
 ## Pasos del laboratorio
 
-### 1. Preparar y arrancar una variante con Bob
+### 1. Arrancar RoomFlow legacy con Bob
 
 Abre en IBM Bob la carpeta descomprimida del laboratorio, la que contiene `legacy-jsf/` y `legacy-struts/`. Copia este prompt y cambia **JSF** por **Struts** si prefieres esa variante.
 
@@ -118,7 +118,7 @@ Busca **Ana**, abre la reserva 1 y comprueba sus datos con la tabla del contexto
 
 ### 4. Elegir UI Modernization y revisar las aprobaciones
 
-Pulsa **Start** en **UI Modernization** (o abre **Java Modernization** y elige ese tipo).
+En **Welcome → Workflows**, pulsa **Start** en la tarjeta **UI Modernization**. Si la tarjeta no aparece, abre **Start Workflow → Java Modernization** en el panel de Bob y elige **UI Modernization**.
 
 | Control o decisión | Qué seleccionar |
 | --- | --- |

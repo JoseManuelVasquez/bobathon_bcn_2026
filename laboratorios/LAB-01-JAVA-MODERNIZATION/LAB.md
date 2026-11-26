@@ -2,11 +2,11 @@
 
 ## Objetivo
 
-Actualizar **Java 8 → Java 21** con IBM Bob Premium Package for Java, corregir una dependencia con un aviso de seguridad y demostrar que asignar y devolver recursos sigue funcionando.
+El primer objetivo es **arrancar AssetDesk legacy con Java 8** y comprobar que la demo asigna y devuelve un recurso. Guarda el resultado de partida. Después, pulsa **Start** en la tarjeta **Java Upgrade** de IBM Bob Premium Package for Java y recorre el asistente.
 
 AssetDesk contiene **cuatro recursos: tres disponibles y uno asignado**. La demo asigna el recurso 1 y lo devuelve. Cada ejecución parte del mismo estado en memoria.
 
-## 1. Preparar y abrir
+## 1. Arrancar AssetDesk legacy
 
 Abre en IBM Bob la carpeta descomprimida del laboratorio, la que contiene `legacy/`. Copia este prompt y pégalo en el chat de Bob.
 
@@ -50,9 +50,11 @@ Compara con [ANALISIS-INICIAL.md](referencia/ANALISIS-INICIAL.md) y anota las re
 
 **Comprobación:** el análisis corresponde al código abierto. AssetDesk no tiene UI, base de datos ni servidor de aplicaciones.
 
-### Remediar una dependencia con Bob
+### Práctica complementaria de remediación
 
-1. En el chat de Bob, escribe **Java Vulnerability Remediation** para abrir el flujo del paquete Premium sobre `work/`.
+Puedes hacer esta práctica antes de cambiar de JDK. El recorrido principal continúa con **Start** en **Java Upgrade**.
+
+1. En **Welcome → Workflows**, pulsa **Start** en **Java Vulnerability Remediation** con `work/` abierto.
 2. Guarda el hallazgo de **Apache Commons Lang**, que se usa en una prueba del CLI. La versión inicial `3.17.0` está afectada por [CVE-2025-48924](https://osv.dev/vulnerability/GHSA-j288-q9x7-2f5v).
 3. Pide a Bob que remediе este hallazgo. Revisa en el diff que actualiza la dependencia a `3.18.0` o posterior compatible con Java 8, y que mantiene `scope` en `test`.
 4. Ejecuta `mvn clean verify` y vuelve a lanzar el escaneo. Conserva la versión anterior y la nueva, el resultado de las pruebas y la evidencia de que el aviso concreto ya no aparece.
@@ -60,7 +62,7 @@ Compara con [ANALISIS-INICIAL.md](referencia/ANALISIS-INICIAL.md) y anota las re
 El ejercicio consiste en corregir la versión declarada en Maven y comprobar el resultado con las pruebas del proyecto. [Flujo de remediación de IBM](https://github.com/IBM/ibm-bob-java#java-vulnerability-remediation).
 
 ## 4. Elegir el flujo y el destino
-Pulsa **Start** en la tarjeta **Java Upgrade**, o inicia **Java Modernization** desde el selector de workflows. [Acceso oficial de IBM](https://bob.ibm.com/es/docs/ide/premium-packages/java-modernization/getting-started).
+En **Welcome → Workflows**, localiza la tarjeta **Java Upgrade** y pulsa **Start**. Si la tarjeta no aparece, abre **Start Workflow → Java Modernization** en el panel de Bob y selecciona **Java Upgrade**. [Acceso oficial de IBM](https://bob.ibm.com/es/docs/ide/premium-packages/java-modernization/getting-started).
 
 En **Flow Selection / Modernization Type**, como en la captura:
 
@@ -120,10 +122,11 @@ Completa **`work/docs/INFORME-FINAL.md`** con el análisis, decisiones, cambios,
 ## Criterios de finalización
 
 - [ ] Análisis integrado revisado.
-- [ ] Dependencia de pruebas actualizada y aviso comprobado con un segundo escaneo.
 - [ ] Java Upgrade ejecutado con destino 21.
 - [ ] Pruebas revisadas y ejecutadas con el JDK destino.
 - [ ] Demo de asignación y devolución correcta.
 - [ ] Resumen detallado y Mermaid contrastados con el código.
+
+Si realizaste la práctica complementaria, adjunta el segundo escaneo.
 
 **Si el wizard no reconoce el proyecto:** revisa la raíz `work/`, el build inicial, JDK/Maven y la instalación/licencia del paquete. Los [requisitos oficiales](https://bob.ibm.com/docs/ide/premium-packages/java-modernization/prerequisites) ayudan a preparar el entorno.
